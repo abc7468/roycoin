@@ -8,7 +8,7 @@ import (
 
 //singleton pattern 단 하나의 instance만을 공유하는 구조
 
-type block struct {
+type Block struct {
 	Data     string
 	Hash     string
 	PrevHash string
@@ -16,14 +16,14 @@ type block struct {
 
 // block의 주소를 저장하는 배열
 type blockchain struct {
-	blocks []*block
+	blocks []*Block
 }
 
 var b *blockchain
 var once sync.Once
 
 //가진 데이터와 이전의 hash를 합한 새로운 hash 생성
-func (b *block) calculateHash() {
+func (b *Block) calculateHash() {
 	hash := sha256.Sum256([]byte(b.Data + b.PrevHash))
 	b.Hash = fmt.Sprintf("%x", hash)
 }
@@ -38,8 +38,8 @@ func getLastHash() string {
 }
 
 // block생성 후 생성된 block의 주솟값 return
-func createBlock(data string) *block {
-	newBlock := block{Data: data, Hash: "", PrevHash: getLastHash()}
+func createBlock(data string) *Block {
+	newBlock := Block{Data: data, Hash: "", PrevHash: getLastHash()}
 	newBlock.calculateHash()
 	return &newBlock
 }
@@ -63,6 +63,6 @@ func GetBlockchain() *blockchain {
 }
 
 //blockchain이 가지고있는 block의 주솟값을 가진 list를 return
-func (b *blockchain) AllBlocks() []*block {
+func (b *blockchain) AllBlocks() []*Block {
 	return b.blocks
 }
