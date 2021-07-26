@@ -20,7 +20,7 @@
 
 ## To Do
 
->- [x] 블록 체인 자료구조 - 2021-07-25
+>- [x] [블록 체인 구조체](https://github.com/abc7468/roycoin/blob/main/blockchain/blockchain.go) 2021-07-25 _ 
 >- [ ] 웹 페이지 
 >- [ ] 작업증명 
 >- [ ] 채굴 
@@ -33,6 +33,9 @@
 - templates
   - pages : 라우팅 될 **페이지**
   - partials : 페이지에 로드될 **블락** 
+
+- blockchain
+  - blockchain 구조체
 
 
 
