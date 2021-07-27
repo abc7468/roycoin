@@ -11,7 +11,6 @@ import (
 
 var templates *template.Template // template를 한번에 로드하여 define으로 가져올 수 있도록 하기 위한 변수
 const (
-	port        string = ":4000"
 	templateDir string = "explorer/templates/"
 )
 
@@ -36,12 +35,13 @@ func add(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Start() {
+func Start(port int) {
+	handler := http.NewServeMux()
 	templates = template.Must(template.ParseGlob(templateDir + "pages/*.gohtml"))
 	templates = template.Must(templates.ParseGlob(templateDir + "partials/*.gohtml")) // **/*.go.html와 같은 문법은 go에서 지원하지 않음
 	//	http.HandleFunc("/",func(rw http.ResponseWriter, r *http.Request) {})
-	http.HandleFunc("/", home)
-	http.HandleFunc("/add", add)
-	fmt.Printf("Listening on http://localhost%s\n", port)
-	log.Fatal(http.ListenAndServe(port, nil))
+	handler.HandleFunc("/", home)
+	handler.HandleFunc("/add", add)
+	fmt.Printf("Listening on http://localhost:%d\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), handler))
 }
