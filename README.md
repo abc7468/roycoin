@@ -24,7 +24,9 @@
 |To Do|작업 명|시작 일|종료 일| 
 |:---:|:---:|:---:|:---:| 
 |[ x ]|[블록 체인 구조체](https://github.com/abc7468/roycoin/blob/main/blockchain/blockchain.go)|2021-07-25|2021-07-25| 
-|[  ]|[서버 사이드 렌더링 웹 사이트](https://github.com/abc7468/roycoin/tree/main/templates)|2021-07-26| 2021-07-27 |
+|[ x ]|[서버 사이드 렌더링 웹 사이트](https://github.com/abc7468/roycoin/tree/main/explorer/templates)|2021-07-26| 2021-07-27 |
+|[  ]|Rest API| 2021-07-27 | ~ |
+|[  ]|CLI| ~ | ~ |
 |[  ]|작업증명| ~ | ~ |
 |[  ]|채굴| ~ | ~ |
 |[  ]|보상| ~ | ~ |
