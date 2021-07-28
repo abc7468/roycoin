@@ -15,11 +15,17 @@
   - 지갑 
 <br>
 <br>
-> > >### 최종 결과물 :  **로이 코인**의 탄생
+> > > ### 최종 결과물 :  **로이 코인**의 탄생
 
 <br>
 ps. Nomad Corder 노마드 코인 클론 코딩
+
 <br>
+
+
+
+
+
 
 ------
 
@@ -30,7 +36,7 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 |:---:|:---:|:---:|:---:| 
 |[ x ]|[블록 체인 구조체](https://github.com/abc7468/roycoin/blob/main/blockchain/blockchain.go)|2021-07-25|2021-07-25| 
 |[ x ]|[서버 사이드 렌더링 웹 사이트](https://github.com/abc7468/roycoin/tree/main/explorer/templates)|2021-07-26| 2021-07-27 |
-|[  ]|Rest API| 2021-07-27 | ~ |
+|[ x ]|[Rest API](https://github.com/abc7468/roycoin/blob/main/rest/rest.go)| 2021-07-27 | 2021-07-29 |
 |[  ]|CLI| ~ | ~ |
 |[  ]|작업증명| ~ | ~ |
 |[  ]|채굴| ~ | ~ |
@@ -41,12 +47,14 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 
 ---
 ## Folders
-- templates
-  - pages : 라우팅 될 **페이지**
-  - partials : 페이지에 로드될 **블락** 
+- explorer : 웹 상에 출력을 위한 코드
+  - templates
+    - pages : 라우팅 될 **페이지**
+    - partials : 페이지에 로드될 **블락** 
 
-- blockchain
-  - blockchain 구조체, Method
+- blockchain : block && blockchain 구조체, Method
 
+- rest : restAPI
 
+- utils : 구현에 도움을 주는 helper 코드
 

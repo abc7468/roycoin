@@ -2,6 +2,7 @@ package blockchain
 
 import (
 	"crypto/sha256"
+	"errors"
 	"fmt"
 	"sync"
 )
@@ -9,9 +10,10 @@ import (
 //singleton pattern 단 하나의 instance만을 공유하는 구조
 
 type Block struct {
-	Data     string
-	Hash     string
-	PrevHash string
+	Data     string `json:"data"`
+	Hash     string `json:"hash"`
+	PrevHash string `json:"prevHash,omitempty"`
+	Height   int    `json:"height"`
 }
 
 // block의 주소를 저장하는 배열
@@ -39,7 +41,7 @@ func getLastHash() string {
 
 // block생성 후 생성된 block의 주솟값 return
 func createBlock(data string) *Block {
-	newBlock := Block{Data: data, Hash: "", PrevHash: getLastHash()}
+	newBlock := Block{Data: data, Hash: "", PrevHash: getLastHash(), Height: len(GetBlockchain().blocks) + 1}
 	newBlock.calculateHash()
 	return &newBlock
 }
@@ -65,4 +67,13 @@ func GetBlockchain() *blockchain {
 //blockchain이 가지고있는 block의 주솟값을 가진 list를 return
 func (b *blockchain) AllBlocks() []*Block {
 	return b.blocks
+}
+
+var ErrNotFound = errors.New("block not found")
+
+func (b *blockchain) GetBlock(height int) (*Block, error) {
+	if height > len(b.blocks) {
+		return nil, ErrNotFound
+	}
+	return b.blocks[height-1], nil
 }
