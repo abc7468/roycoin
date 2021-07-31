@@ -37,7 +37,7 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 |[ x ]|[블록 체인 구조체](https://github.com/abc7468/roycoin/blob/main/blockchain/blockchain.go)|2021-07-25|2021-07-25| 
 |[ x ]|[서버 사이드 렌더링 웹 사이트](https://github.com/abc7468/roycoin/tree/main/explorer/templates)|2021-07-26| 2021-07-27 |
 |[ x ]|[Rest API](https://github.com/abc7468/roycoin/blob/main/rest/rest.go)| 2021-07-27 | 2021-07-29 |
-|[  ]|CLI| 2021-07-31 | ~ |
+|[ x ]|CLI| 2021-07-31 | 2021-07-31 |
 |[  ]|작업증명| ~ | ~ |
 |[  ]|채굴| ~ | ~ |
 |[  ]|보상| ~ | ~ |
@@ -55,6 +55,8 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 - blockchain : block && blockchain 구조체, Method
 
 - rest : restAPI
+
+- cli : terminal에서 flag설정을 해주는 cli 작성
 
 - utils : 구현에 도움을 주는 helper 코드
 
