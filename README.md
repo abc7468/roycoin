@@ -37,7 +37,8 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 |[ x ]|[블록 체인 구조체](https://github.com/abc7468/roycoin/blob/main/blockchain/blockchain.go)|2021-07-25|2021-07-25| 
 |[ x ]|[서버 사이드 렌더링 웹 사이트](https://github.com/abc7468/roycoin/tree/main/explorer/templates)|2021-07-26| 2021-07-27 |
 |[ x ]|[Rest API](https://github.com/abc7468/roycoin/blob/main/rest/rest.go)| 2021-07-27 | 2021-07-29 |
-|[ x ]|CLI| 2021-07-31 | 2021-07-31 |
+|[ x ]|[CLI](https://github.com/abc7468/roycoin/blob/main/cli/cli.go)| 2021-07-31 | 2021-07-31 |
+|[  ]|DB| ~ | ~ |
 |[  ]|작업증명| ~ | ~ |
 |[  ]|채굴| ~ | ~ |
 |[  ]|보상| ~ | ~ |
