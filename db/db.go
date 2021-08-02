@@ -24,6 +24,7 @@ func DB() *bolt.DB {
 			_, err = t.CreateBucketIfNotExists([]byte(blocksBucket))
 			return err
 		})
+		utils.HandleErr(err)
 	}
 	return db
 }
