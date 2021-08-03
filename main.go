@@ -1,7 +1,9 @@
 package main
 
-import "github.com/abc7468/roycoin/cli"
+import (
+	"github.com/abc7468/roycoin/blockchain"
+)
 
 func main() {
-	cli.Start()
+	blockchain.Blockchain()
 }
