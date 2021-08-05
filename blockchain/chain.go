@@ -1,9 +1,6 @@
 package blockchain
 
 import (
-	"bytes"
-	"encoding/gob"
-	"fmt"
 	"sync"
 
 	"github.com/abc7468/roycoin/db"
@@ -19,8 +16,7 @@ var b *blockchain
 var once sync.Once
 
 func (b *blockchain) restore(data []byte) {
-	decoder := gob.NewDecoder(bytes.NewReader(data))
-	utils.HandleErr(decoder.Decode(b)) //주솟값 넘겨야함
+	utils.FromBytes(b, data)
 }
 
 func (b *blockchain) persist() {
@@ -39,18 +35,14 @@ func Blockchain() *blockchain {
 		//병렬적으로 처리한다고 해도 딱 한번만 실행하도록 도와주는 함수
 		once.Do(func() {
 			b = &blockchain{"", 0}
-			fmt.Printf("NewestHash: %s\nHeight:%d\n", b.NewestHash, b.Height)
 			checkpoint := db.Checkpoint()
 			if checkpoint == nil {
 				b.AddBlock("Genesis")
 			} else {
-				fmt.Printf("Restoring...")
-
 				b.restore(checkpoint)
 			}
 		})
 	}
-	fmt.Printf("NewestHash: %s\nHeight:%d", b.NewestHash, b.Height)
 
 	return b
 }
