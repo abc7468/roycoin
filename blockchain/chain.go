@@ -30,6 +30,22 @@ func (b *blockchain) AddBlock(data string) {
 	b.persist()
 }
 
+func (b *blockchain) Blocks() []*Block {
+	var blocks []*Block
+	hashCursor := b.NewestHash
+
+	for {
+		block, _ := FindBlock(hashCursor)
+		blocks = append(blocks, block)
+		if block.PrevHash != "" {
+			hashCursor = block.PrevHash
+		} else {
+			break
+		}
+	}
+	return blocks
+}
+
 func Blockchain() *blockchain {
 	if b == nil {
 		//병렬적으로 처리한다고 해도 딱 한번만 실행하도록 도와주는 함수

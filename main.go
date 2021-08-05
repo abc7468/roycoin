@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/abc7468/roycoin/blockchain"
 	"github.com/abc7468/roycoin/cli"
+	"github.com/abc7468/roycoin/db"
 )
 
 func main() {
-	blockchain.Blockchain()
+	defer db.Close()
 	cli.Start()
 }
