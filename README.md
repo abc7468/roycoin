@@ -63,3 +63,4 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 
 - utils : 구현에 도움을 주는 helper 코드
 
+- db : persistance를 위한 함수(Bolt DB)
