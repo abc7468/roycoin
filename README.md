@@ -39,7 +39,7 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 |[ x ]|[Rest API](https://github.com/abc7468/roycoin/blob/main/rest/rest.go)| 2021-07-27 | 2021-07-29 |
 |[ x ]|[CLI](https://github.com/abc7468/roycoin/blob/main/cli/cli.go)| 2021-07-31 | 2021-07-31 |
 |[ x ]|[DB](https://github.com/abc7468/roycoin/blob/main/db/db.go)| 2021-08-02 | 2021-08-06 |
-|[  ]|작업증명| ~ | ~ |
+|[  ]|작업증명| 2021-08-07 | ~ |
 |[  ]|채굴| ~ | ~ |
 |[  ]|보상| ~ | ~ |
 |[  ]|P2P 거래| ~ | ~ |
