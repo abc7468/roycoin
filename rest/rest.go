@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/abc7468/roycoin/blockchain"
+	"github.com/abc7468/roycoin/utils"
 	"github.com/gorilla/mux"
 )
 
@@ -17,6 +18,11 @@ type urlDescription struct {
 	Method      string `json:"method"`
 	Description string `json:"description"`
 	Payload     string `json:"payload,omitempty"`
+}
+
+type balaceResponse struct {
+	Address string `json:"address"`
+	Balance int    `json:"balance"`
 }
 
 type errorResponse struct {
@@ -52,6 +58,11 @@ func documentation(rw http.ResponseWriter, r *http.Request) {
 			Method:      "POST",
 			Description: "Add A block",
 			Payload:     "data:string",
+		},
+		{
+			URL:         url("/balance/{address}"),
+			Method:      "GET",
+			Description: "Get TxOuts for an Address",
 		},
 	}
 	fmt.Println(data)
@@ -94,6 +105,19 @@ func status(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(blockchain.Blockchain())
 }
 
+func balance(rw http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	address := vars["address"]
+	total := r.URL.Query().Get("total")
+	switch total {
+	case "true":
+		amount := blockchain.Blockchain().BalanceByAddress(address)
+		json.NewEncoder(rw).Encode(balaceResponse{address, amount})
+	default:
+		utils.HandleErr(json.NewEncoder(rw).Encode(blockchain.Blockchain().TxOutsByAddress(address)))
+	}
+}
+
 func Start(aPort int) {
 	// fmt.Println(URLDescription{
 	// 	URL:         "/",
@@ -107,6 +131,7 @@ func Start(aPort int) {
 	router.HandleFunc("/blocks", blocks).Methods("GET", "POST")
 	router.HandleFunc("/blocks/{hash:[a-f0-9]+}", block).Methods("GET")
 	router.HandleFunc("/status", status)
+	router.HandleFunc("/balance/{address}", balance)
 	fmt.Printf("Listening on http://localhost%s\n", port)
 	log.Fatal(http.ListenAndServe(port, router))
 }
