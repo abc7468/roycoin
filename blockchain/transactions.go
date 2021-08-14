@@ -67,7 +67,7 @@ func makeTx(from, to string, amount int) (*Tx, error) {
 		if total > amount {
 			break
 		}
-		txIn := &TxIn{}
+		txIn := &TxIn{txOut.Owner, txOut.Amount}
 		txIns = append(txIns, txIn)
 		total += txOut.Amount
 	}
@@ -77,13 +77,22 @@ func makeTx(from, to string, amount int) (*Tx, error) {
 		txOuts = append(txOuts, changeTxOut)
 	}
 	txOut := &TxOut{to, amount}
-	txOuts = app
+	txOuts = append(txOuts, txOut)
+	tx := &Tx{
+		Id:        "",
+		Timestamp: int(time.Now().Unix()),
+		TxIns:     txIns,
+		TxOuts:    txOuts,
+	}
+	tx.getId()
+	return tx, nil
 }
 
 func (m *mempool) AddTx(to string, amount int) error {
-	tx, err := makeTx("roy", to, amount)
+	tx, err := makeTx("hyunYu", to, amount)
 	if err != nil {
 		return err
 	}
 	m.Txs = append(m.Txs, tx)
+	return nil
 }
