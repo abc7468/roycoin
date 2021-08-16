@@ -41,7 +41,7 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 |[ x ]|[DB](https://github.com/abc7468/roycoin/blob/main/db/db.go)| 2021-08-02 | 2021-08-06 |
 |[ x ]|채굴 & 작업증명| 2021-08-07 | 2021-08-09 |
 |[ x ]|보상| 2021-08-12 | 2021-08-16 |
-|[  ]|지갑| ~ | ~ |
+|[  ]|지갑| 2021-08-17 | ~ |
 |[  ]|P2P 거래| ~ | ~ |
 
 
@@ -63,3 +63,5 @@ ps. Nomad Corder 노마드 코인 클론 코딩
 - utils : 구현에 도움을 주는 helper 코드
 
 - db : persistance를 위한 함수(Bolt DB)
+
+- wallet : 지갑을 구현하기 위한 Struct와 Method

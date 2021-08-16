@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/abc7468/roycoin/cli"
-)
+import "github.com/abc7468/roycoin/wallet"
 
 func main() {
-	cli.Start()
+	wallet.Start()
 }
