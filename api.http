@@ -15,12 +15,15 @@ http://localhost:4000/blocks/3
 POST http://localhost:4000/transactions
 
 {
-    "to":"roy",
-    "amount":40
+    "to":"hyunyu",
+    "amount":60
 }
 
 ###
 http://localhost:4000/mempool
 
 ###
-http://localhost:4000/balance/hyunYu?total=true
+http://localhost:4000/balance/hyunyu
+
+###
+http://localhost:4000/wallet

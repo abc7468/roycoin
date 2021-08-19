@@ -50,7 +50,7 @@ func restoreKey() *ecdsa.PrivateKey {
 
 func encodeBigInts(a, b []byte) string {
 	z := append(a, b...)
-	return fmt.Sprint(z)
+	return fmt.Sprintf("%x", z)
 }
 
 func aFromK(key *ecdsa.PrivateKey) string {
