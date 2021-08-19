@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/abc7468/roycoin/blockchain"
+	"github.com/abc7468/roycoin/p2p"
 	"github.com/abc7468/roycoin/utils"
 	"github.com/abc7468/roycoin/wallet"
 	"github.com/gorilla/mux"
@@ -37,6 +38,10 @@ type errorResponse struct {
 type addTxPayload struct {
 	To     string
 	Amount int
+}
+
+type addPeerPayload struct {
+	Address, Port string
 }
 
 type url string
@@ -73,6 +78,11 @@ func documentation(rw http.ResponseWriter, r *http.Request) {
 			URL:         url("/balance/{address}"),
 			Method:      "GET",
 			Description: "Get TxOuts for an Address",
+		},
+		{
+			URL:         url("/ws"),
+			Method:      "GET",
+			Description: "Upgrade http to websocket",
 		},
 	}
 	fmt.Println(data)
@@ -149,15 +159,30 @@ func myWallet(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(myWalletResponse{Address: address})
 }
 
+func peers(rw http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "POST":
+		var payload addPeerPayload
+		json.NewDecoder(r.Body).Decode(&payload)
+		p2p.AddPeer(payload.Address, payload.Port, port)
+		rw.WriteHeader(http.StatusOK)
+
+	case "GET":
+		json.NewEncoder(rw).Encode(p2p.Peers)
+	}
+}
+
+func loggerMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+		fmt.Println(r.URL)
+		next.ServeHTTP(rw, r)
+	})
+}
+
 func Start(aPort int) {
-	// fmt.Println(URLDescription{
-	// 	URL:         "/",
-	// 	Method:      "GET",
-	// 	Description: "See Documentation",
-	// })
 	port = fmt.Sprintf(":%d", aPort)
 	router := mux.NewRouter()
-	router.Use(jsonContentTypeMiddleware)
+	router.Use(jsonContentTypeMiddleware, loggerMiddleware)
 	router.HandleFunc("/", documentation).Methods("GET")
 	router.HandleFunc("/blocks", blocks).Methods("GET", "POST")
 	router.HandleFunc("/blocks/{hash:[a-f0-9]+}", block).Methods("GET")
@@ -166,6 +191,8 @@ func Start(aPort int) {
 	router.HandleFunc("/mempool", mempool).Methods("GET")
 	router.HandleFunc("/wallet", myWallet).Methods("GET")
 	router.HandleFunc("/transactions", transactions).Methods("POST")
+	router.HandleFunc("/ws", p2p.Upgrade).Methods("GET")
+	router.HandleFunc("/peers", peers).Methods("GET", "POST")
 
 	fmt.Printf("Listening on http://localhost%s\n", port)
 	log.Fatal(http.ListenAndServe(port, router))

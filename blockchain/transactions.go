@@ -155,4 +155,5 @@ func (m *mempool) TxToConfirm() []*Tx {
 	txs = append(txs, coinbase)
 	m.Txs = nil
 	return txs
+
 }
